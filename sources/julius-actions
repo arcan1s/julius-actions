@@ -33,7 +33,7 @@ done
 
 if [[ -z ${ACTIONS} || -z ${CONFIG} ]]; then
   echo "Parametrs aren't set"
-  func_help()
+  func_help
 fi
 
 # change cwd

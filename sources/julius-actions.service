@@ -4,7 +4,7 @@ Description=julius action service
 [Service]
 EnvironmentFile=/etc/conf.d/julius-actions.conf
 Type=forking
-ExecStart=/usr/bin/julius-actions -a ACTIONS -c CONFIG
+ExecStart=/usr/bin/julius-actions -a $ACTIONS -c $CONFIG
 RemainAfterExit=yes
 
 [Install]

@@ -13,7 +13,7 @@ except:
 def create_vocab(vocab_file):
     """function that reads input file"""
     if not os.path.exists(vocab_file):
-        print "File doen't exist"
+        print "File doesn't exist"
         sys.exit(1)
     vocabulary = {}
     with open(vocab_file, "r") as vocab:
