@@ -1,0 +1,11 @@
+[Unit]
+Description=julian action service
+
+[Service]
+EnvironmentFile=/etc/conf.d/julian-actions.conf
+Type=forking
+ExecStart=/usr/bin/julius-actions -a ACTIONS -c CONFIG
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

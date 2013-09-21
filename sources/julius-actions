@@ -1,0 +1,45 @@
+#!/bin/bash
+func_help() {
+  echo -e "Usage: julius-actions -a ACTION_FILE -c CONFIG_FILE [ -p | --prefix PREFIX ] [ -h | --help ]"
+  exit 1
+}
+
+PREFIX=/usr/bin
+until [ -z $1 ]; do
+  if [ "$1" = "-h" ]; then
+    func_help; fi
+  if [ "$1" = "--help" ]; then
+    func_help; fi
+  if [ "$1" = "-a" ]; then
+    ACTIONS=${2}
+    shift; fi
+  if [ "$1" = "--action-file" ]; then
+    ACTIONS=${2}
+    shift; fi
+  if [ "$1" = "-c" ]; then
+    CONFIG=${2}
+    shift; fi
+  if [ "$1" = "--config-file" ]; then
+    CONFIG=${2}
+    shift; fi
+  if [ "$1" = "-p" ]; then
+    PREFIX=${2}
+    shift; fi
+  if [ "$1" = "--prefix" ]; then
+    PREFIX=${2}
+    shift; fi
+  shift
+done
+
+if [[ -z ${ACTIONS} || -z ${CONFIG} ]]; then
+  echo "Parametrs aren't set"
+  func_help()
+fi
+
+# change cwd
+cd /
+# output to /dev/null
+< /dev/null > /dev/null 2>&1 &
+
+# run
+${PREFIX}/julius -quiet -nolog -input mic -C ${CONFIG} 2>/dev/null | ${PREFIX}/julius-actions.py ${ACTIONS}
