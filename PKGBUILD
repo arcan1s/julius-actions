@@ -1,7 +1,7 @@
 # Author: Evgeniy "arcanis" Alexeev <esalexeev@gmail.com>
 # Maintainer: Evgeniy "arcanis" Alexeev <esalexeev@gmail.com>
 
-pkgname=julius-action
+pkgname=julius-actions
 pkgver=1.0.0
 pkgrel=1
 pkgdesc="julius action daemon"
