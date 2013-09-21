@@ -2,7 +2,7 @@
 # Maintainer: Evgeniy "arcanis" Alexeev <esalexeev@gmail.com>
 
 pkgname=julius-actions
-pkgver=1.0.0
+pkgver=1.0.1
 pkgrel=1
 pkgdesc="julius action daemon"
 arch=('x86_64')
@@ -10,7 +10,7 @@ url="https://github.com/arcan1s/julius-actions"
 license=("GPL")
 depends=('bash' 'julius' 'python2')
 source=(https://github.com/arcan1s/julius-actions/releases/download/V.${pkgver}/${pkgname}-${pkgver}.tar.xz)
-md5sums=('4e9676dfe75441db18a1c425b0fc4b2f')
+md5sums=('58e861050a52fa055e78b3dfd2e478c1')
 backup=('etc/conf.d/julius-actions.conf')
 
 package()

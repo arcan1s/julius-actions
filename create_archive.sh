@@ -15,6 +15,6 @@ cp sources/julius-actions julius-actions/usr/bin/
 cp sources/julius-actions.py julius-actions/usr/bin/
 
 cd julius-actions
-tar -cf - * | xz -9 -c - > ../julius-actions-1.0.0.tar.xz
+tar -cf - * | xz -9 -c - > ../julius-actions-1.0.1.tar.xz
 cd ..
 rm -r julius-actions
