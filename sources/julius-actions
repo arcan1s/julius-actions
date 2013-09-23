@@ -1,9 +1,22 @@
 #!/bin/bash
-func_help() {
-  echo -e "Usage: julius-actions -a ACTION_FILE -c CONFIG_FILE [ -p | --prefix PREFIX ] [ -h | --help ]"
-  exit 1
+func_help()
+{
+  echo -e "Usage: julius-actions -a ACTION_FILE -c CONFIG_FILE [ -p | --prefix PREFIX ]"
+  echo -e "                         [ -e | --edit ] [ -E | --edit-all ] [ -h | --help ]"
+  echo -e "\nRequired parameters:"
+  echo -e "  -a  --action-file   - path to julius actions file"
+  echo -e "  -c  --config-file   - path to julius configuration file"
+  echo -e "Additional parametrs:"
+  echo -e "  -p  --prefix        - binary prefix. Default is '/usr/bin'"
+  echo -e "  -e  --edit          - add new julius actions"
+  echo -e "  -E  --edit-all      - edit old julius actions add new actions"
+  echo -e "  -h  --help          - show this help and exit"
+  exit 0
 }
 
+ACTIONS=${HOME}/.config/julius/julius-actions.conf
+CONFIG=${HOME}/.config/julius/julius.jconf
+EDIT=0
 PREFIX=/usr/bin
 until [ -z $1 ]; do
   if [ "$1" = "-h" ]; then
@@ -28,14 +41,36 @@ until [ -z $1 ]; do
   if [ "$1" = "--prefix" ]; then
     PREFIX=${2}
     shift; fi
+  if [ "$1" = "-e" ]; then
+    EDIT=1; fi
+  if [ "$1" = "--edit" ]; then
+    EDIT=1; fi
+  if [ "$1" = "-E" ]; then
+    EDIT=2; fi
+  if [ "$1" = "--edit-all" ]; then
+    EDIT=2; fi
   shift
 done
 
-if [[ -z ${ACTIONS} || -z ${CONFIG} ]]; then
-  echo "Parametrs aren't set"
-  func_help
+if [[ ! -e ${ACTIONS} || ! -e ${CONFIG} ]]; then
+  echo "Files don't exist"
+  exit 1
 fi
 
+# add new commands
+if [[ ${EDIT} -eq 1 ]]; then
+  ${PREFIX}/ja-edit.py -a ${ACTIONS} -c ${CONFIG}
+  exit 0
+fi
+
+# add new commands and edit old
+if [[ ${EDIT} -eq 2 ]]; then
+  ${PREFIX}/ja-edit.py -a ${ACTIONS} -c ${CONFIG} -e
+  exit 0
+fi
+
+
+# work block
 # change cwd
 cd /
 # output to /dev/null
